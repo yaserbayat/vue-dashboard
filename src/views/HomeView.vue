@@ -1,6 +1,8 @@
 <script lang="ts">
 import InputField from "../components/InputField.vue";
 import { defineComponent } from "vue";
+import users from "@/data/users";
+import router from "@/router";
 
 export default defineComponent({
   components: { InputField },
@@ -8,12 +10,22 @@ export default defineComponent({
     const onSubmit = (e: Event) => {
       const target = e.target as HTMLFormElement;
       const formData = new FormData(target);
-      const data = {};
+      const data = { username: "", password: "" };
       // need to convert it before using it
       for (let [key, val] of formData.entries()) {
         Object.assign(data, { [key]: val });
       }
-      console.log(data);
+      const user = users.filter(
+        (user) =>
+          user.username === data.username && user.password === data.password
+      );
+      if (user.length) {
+        router.push({
+          name: "dashboard",
+          path: "/dashboard",
+          params: { id: user[0].id },
+        });
+      }
     };
     return { onSubmit };
   },
