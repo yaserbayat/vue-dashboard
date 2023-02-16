@@ -9,7 +9,7 @@ const router = createRouter({
       component: () => import("@/views/HomeView.vue"),
     },
     {
-      path: "/dashboard/:id/",
+      path: "/dashboard/",
       name: "dashboard",
       component: () => import("@/views/DashboardView.vue"),
       children: [
@@ -18,8 +18,8 @@ const router = createRouter({
           component: () => import("@/views/dashboard/UserView.vue"),
         },
         {
-          path: "stats",
-          component: () => import("@/views/dashboard/UserStats.vue"),
+          path: "posts",
+          component: () => import("@/views/dashboard/UserPosts.vue"),
         },
       ],
     },

@@ -33,10 +33,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="h-screen flex justify-center items-center">
+  <div class="h-screen bg-indigo-50 flex justify-center items-center">
     <form
       v-on:submit.prevent="(e) => onSubmit(e)"
-      class="flex flex-col w-full md:w-1/2 mx-auto py-2 px-3 border rounded-md mt-1/2 max-w-screen-sm shadow-md"
+      class="bg-white flex flex-col w-full sm:w-1/2 md:w-1/3 mx-auto py-2 px-3 border rounded-md mt-1/2 max-w-screen-sm shadow-md"
     >
       <h1 class="text-center text-lg font-bold">Welcome</h1>
       <InputField type="text" label="Username" name="username" />
