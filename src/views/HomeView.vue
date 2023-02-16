@@ -1,6 +1,8 @@
 <script lang="ts">
 import InputField from "../components/InputField.vue";
 import { defineComponent } from "vue";
+import users from "@/data/users";
+import router from "@/router";
 
 export default defineComponent({
   components: { InputField },
@@ -8,12 +10,22 @@ export default defineComponent({
     const onSubmit = (e: Event) => {
       const target = e.target as HTMLFormElement;
       const formData = new FormData(target);
-      const data = {};
+      const data = { username: "", password: "" };
       // need to convert it before using it
       for (let [key, val] of formData.entries()) {
         Object.assign(data, { [key]: val });
       }
-      console.log(data);
+      const user = users.filter(
+        (user) =>
+          user.username === data.username && user.password === data.password
+      );
+      if (user.length) {
+        router.push({
+          name: "dashboard",
+          path: "/dashboard",
+          params: { id: user[0].id },
+        });
+      }
     };
     return { onSubmit };
   },
@@ -21,10 +33,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="h-screen flex justify-center items-center">
+  <div class="h-screen bg-indigo-50 flex justify-center items-center">
     <form
       v-on:submit.prevent="(e) => onSubmit(e)"
-      class="flex flex-col w-full md:w-1/2 mx-auto py-2 px-3 border rounded-md mt-1/2 max-w-screen-sm shadow-md"
+      class="bg-white flex flex-col w-full sm:w-1/2 md:w-1/3 mx-auto py-2 px-3 border rounded-md mt-1/2 max-w-screen-sm shadow-md"
     >
       <h1 class="text-center text-lg font-bold">Welcome</h1>
       <InputField type="text" label="Username" name="username" />
