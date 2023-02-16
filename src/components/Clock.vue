@@ -71,7 +71,7 @@ export default defineComponent({
     },
   },
   data() {
-    return { clock: this.clock };
+    return { clock: this.clock, interval: 0 };
   },
   mounted() {
     this.interval = setInterval(this.startTicking, 1000);
